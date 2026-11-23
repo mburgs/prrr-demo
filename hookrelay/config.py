@@ -11,8 +11,12 @@ class Settings:
     webhook_url: str = "https://hooks.example.com/ingest"
     secret: str = "dev-secret"
     # Total delivery attempts per event, including the first one.
-    retry_count: int = 3
+    max_attempts: int = 3
+    # Delay before the second attempt; doubles after each further failure.
     retry_delay_sec: float = 0.5
+    retry_max_delay_sec: float = 8.0
+    # Upper bound of the random delay added to each backoff step.
+    retry_jitter_sec: float = 0.25
     timeout_sec: float = 5.0
     bucket_capacity: int = 10
     bucket_refill_per_sec: float = 5.0

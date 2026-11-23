@@ -44,7 +44,7 @@ def main(argv: list[str] | None = None) -> int:
     settings = Settings.from_dict({"bucket_capacity": 8, "bucket_refill_per_sec": 1.0})
     dispatcher = Dispatcher(FakeTransport(), settings, sleep=lambda _s: None)
 
-    print(f"{'EVENT':<8} {'TENANT':<13} {'RESULT':<14} {'STATUS':>6} {'ATTEMPTS':>8}")
+    print(f"{'EVENT':<8} {'TENANT':<13} {'RESULT':<20} {'STATUS':>6} {'ATTEMPTS':>8}")
     delivered = 0
     results = []
     for event in EVENTS:
@@ -53,7 +53,7 @@ def main(argv: list[str] | None = None) -> int:
         delivered += result.delivered
         status = "-" if result.status is None else str(result.status)
         print(
-            f"{result.event_id:<8} {result.tenant:<13} {result.reason:<14} "
+            f"{result.event_id:<8} {result.tenant:<13} {result.reason:<20} "
             f"{status:>6} {result.attempts:>8}"
         )
     print(f"\n{delivered}/{len(results)} delivered")
