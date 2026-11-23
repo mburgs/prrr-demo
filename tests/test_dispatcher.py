@@ -72,9 +72,9 @@ def test_request_is_signed(sleeps):
     assert verify("abc", body, headers[SIGNATURE_HEADER])
 
 
-def test_rate_limited_events_never_hit_transport(sleeps):
+def test_rate_limited_events_never_hit_transport(sleeps, clock):
     transport = ScriptedTransport(200, 200)
-    bucket = TokenBucket(2, 0.001)
+    bucket = TokenBucket(2, 0.001, clock)
     dispatcher = Dispatcher(
         transport, Settings(), sleep=sleeps.append, bucket=bucket
     )
