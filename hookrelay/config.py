@@ -16,6 +16,10 @@ class Settings:
     timeout_sec: float = 5.0
     bucket_capacity: int = 10
     bucket_refill_per_sec: float = 5.0
+    # Per-tenant limits, enforced in addition to the global bucket above.
+    tenant_capacity: int = 3
+    tenant_refill_per_sec: float = 1.0
+    max_tenants: int = 1000
 
     @classmethod
     def from_dict(cls, data: Mapping[str, Any]) -> "Settings":

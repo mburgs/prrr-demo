@@ -9,6 +9,9 @@ def test_defaults():
     s = Settings()
     assert s.retry_count == 3
     assert s.bucket_capacity == 10
+    assert s.tenant_capacity == 3
+    assert s.tenant_refill_per_sec == 1.0
+    assert s.max_tenants == 1000
 
 
 def test_from_dict_overrides():
